@@ -4,10 +4,10 @@ import GoogleIcon from '@mui/icons-material/Google';
 
 export const LoginPage: React.FC = () => {
   return (
-    <Box sx={{ marginTop: '100px' }}>
-      <Container>
+    <Container sx={{ transform: 'translateY(-50%)' }}>
+      <Box>
         <Box>
-          <Typography variant="h5">Please Login</Typography>
+          <Typography variant="h3">Please Login</Typography>
         </Box>
         <Box sx={{ marginTop: '16px' }}>
           <Typography variant="body1">
@@ -19,14 +19,15 @@ export const LoginPage: React.FC = () => {
           sx={{ marginTop: '30px', display: 'flex', justifyContent: 'center' }}
         >
           <Button
+            sx={{ background: '#4285F4', marginTop: '20px' }}
             startIcon={<GoogleIcon style={{ color: '#db4437' }} />}
-            variant="outlined"
+            variant="contained"
             size="large"
           >
             Login with google
           </Button>
         </Box>
-      </Container>
-    </Box>
+      </Box>
+    </Container>
   );
 };
