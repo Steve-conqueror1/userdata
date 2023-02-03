@@ -1,2 +1,4 @@
-// eslint-disable-next-line import/no-anonymous-default-export
-export default null
+export * from './shared/Header';
+export * from './shared/Footer';
+
+export * from './FooterListItem';
