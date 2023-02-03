@@ -12,12 +12,13 @@ export const Footer: React.FC = () => {
   return (
     <Box
       sx={{
-        position: 'absolute',
-        bottom: '0',
-        left: '0',
-        right: '0',
+        margin: 'auto 0',
         background: '#000',
         padding: '16px',
+        position: 'absolute',
+        bottom: '0',
+        right: '0',
+        left: '0',
       }}
     >
       <Container sx={{ color: '#fff' }}>
