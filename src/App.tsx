@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { LandingPage, Home, Album, LoginPage, User, Photo } from './pages';
-import { Header } from './components';
+import { Footer, Header } from './components';
 
 function App() {
   return (
@@ -15,6 +15,7 @@ function App() {
         <Route path="/albums/:id" element={<Album />} />
         <Route path="/photos/:id" element={<Photo />} />s
       </Routes>
+      <Footer />
     </Router>
   );
 }

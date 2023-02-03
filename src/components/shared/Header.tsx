@@ -21,7 +21,7 @@ export const Header: React.FC = () => {
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 2 }}
+            sx={{ mr: 2, color: '#BADA9B' }}
           >
             <HomeIcon onClick={() => navigate('/')} />
           </IconButton>
