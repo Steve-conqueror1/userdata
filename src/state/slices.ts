@@ -10,6 +10,7 @@ const authData = createSlice({
     email: '',
     given_name: '',
     family_name: '',
+    sub: '',
   },
 
   reducers: {
@@ -25,6 +26,7 @@ const authData = createSlice({
       email: '',
       given_name: '',
       family_name: '',
+      sub: '',
     }),
   },
 });

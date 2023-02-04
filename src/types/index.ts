@@ -4,4 +4,5 @@ export type AuthPayload = {
   given_ame: string;
   family_Name: string;
   picture: string;
+  sub: string;
 };

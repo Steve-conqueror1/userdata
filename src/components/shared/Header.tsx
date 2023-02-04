@@ -9,12 +9,23 @@ import {
 } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import { useNavigate } from 'react-router-dom';
-import { useTypedSelector } from '../../hooks';
+import { useTypedSelector, useActions } from '../../hooks';
 
 export const Header: React.FC = () => {
   const navigate = useNavigate();
   const state = useTypedSelector((state) => state);
+  const actions = useActions();
   const { given_name } = state.authData;
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    if (!given_name) {
+      navigate('/login');
+    } else {
+      actions.clearStore();
+    }
+  };
+
   return (
     <Box>
       <AppBar position="fixed">
@@ -24,7 +35,7 @@ export const Header: React.FC = () => {
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 2, color: '#BADA9B' }}
+            sx={{ mr: 2, color: '#bada9b' }}
           >
             <HomeIcon onClick={() => navigate('/')} />
           </IconButton>
@@ -38,11 +49,10 @@ export const Header: React.FC = () => {
           >
             {given_name && `Welcome ${given_name}`}
           </Typography>
-          {!given_name && (
-            <Button onClick={() => navigate('/login')} variant="contained">
-              Login
-            </Button>
-          )}
+
+          <Button onClick={handleClick} variant="contained">
+            {!given_name ? 'Login' : 'Logout'}
+          </Button>
         </Toolbar>
       </AppBar>
     </Box>
