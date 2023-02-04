@@ -1,10 +1,40 @@
-import React from 'react';
-import { Box, Typography, Container, Button } from '@mui/material';
-import GoogleIcon from '@mui/icons-material/Google';
+import React, { useEffect, useState } from 'react';
+import { Box, Typography, Container } from '@mui/material';
+import jwtDecode from 'jwt-decode';
+
+type GoogleResponse = {
+  clientId: string;
+  credential: string;
+};
 
 export const LoginPage: React.FC = () => {
+  const [user, setUser] = useState<{ [key: string]: string }>({}); //Fixme: use redux
+  const handleCallbackResponse = (response: GoogleResponse) => {
+    console.log('response', response);
+
+    const { credential } = response;
+
+    const userObject = jwtDecode(credential);
+
+    setUser(userObject as { [key: string]: string });
+  };
+
+  useEffect(() => {
+    /* global google */
+    // @ts-ignore
+    google.accounts.id.initialize({
+      client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+      callback: handleCallbackResponse,
+    });
+
+    // @ts-ignore
+    google.accounts.id.renderButton(document.getElementById('signInBox'), {
+      theme: 'filled_blue',
+      size: 'large',
+    });
+  }, []);
   return (
-    <Container sx={{ transform: 'translateY(-50%)' }}>
+    <Container sx={{ transform: 'translateY(-50%)', padding: '60px 0' }}>
       <Box>
         <Box>
           <Typography variant="h3">Please Login</Typography>
@@ -18,14 +48,7 @@ export const LoginPage: React.FC = () => {
         <Box
           sx={{ marginTop: '30px', display: 'flex', justifyContent: 'center' }}
         >
-          <Button
-            sx={{ background: '#4285F4', marginTop: '20px' }}
-            startIcon={<GoogleIcon style={{ color: '#db4437' }} />}
-            variant="contained"
-            size="large"
-          >
-            Login with google
-          </Button>
+          <Box sx={{ marginTop: '20px' }} id="signInBox"></Box>
         </Box>
       </Box>
     </Container>

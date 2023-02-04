@@ -4,5 +4,8 @@
     "plugin:@typescript-eslint/recommended",
     "react-app",
     "prettier"
-  ]
+  ],
+  "rules": {
+    "@typescript-eslint/ban-ts-comment": "off"
+  }
 }
