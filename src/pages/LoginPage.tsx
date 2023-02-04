@@ -34,7 +34,7 @@ export const LoginPage: React.FC = () => {
     });
   }, []);
   return (
-    <Container sx={{ transform: 'translateY(-50%)', minHeight: '50%' }}>
+    <Container sx={{ minHeight: 'auto', margin: '180px 0 360px 0' }}>
       <Box>
         <Box>
           <Typography variant="h3">Please Login</Typography>
