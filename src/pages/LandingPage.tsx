@@ -4,7 +4,7 @@ import { Box, Container, Link as MuiLink, Typography } from '@mui/material';
 export const LandingPage: React.FC = () => {
   return (
     <Container sx={{ minHeight: 'auto' }}>
-      <Box sx={{ minHeight: 'auto', margin: '10px 0 360px 0' }}>
+      <Box sx={{ minHeight: 'auto', margin: '180px 0 360px 0' }}>
         <Box sx={{ marginBottom: '40px' }}>
           <Typography variant="h3">Welcome to userata test app</Typography>
         </Box>
