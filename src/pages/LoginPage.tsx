@@ -1,6 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Box, Typography, Container } from '@mui/material';
 import jwtDecode from 'jwt-decode';
+
+import { useActions } from '../hooks';
+import { AuthPayload } from '../types';
+import { useNavigate } from 'react-router-dom';
 
 type GoogleResponse = {
   clientId: string;
@@ -8,7 +12,9 @@ type GoogleResponse = {
 };
 
 export const LoginPage: React.FC = () => {
-  const [user, setUser] = useState<{ [key: string]: string }>({}); //Fixme: use redux
+  const navigate = useNavigate();
+  const actions = useActions();
+
   const handleCallbackResponse = (response: GoogleResponse) => {
     console.log('response', response);
 
@@ -16,7 +22,8 @@ export const LoginPage: React.FC = () => {
 
     const userObject = jwtDecode(credential);
 
-    setUser(userObject as { [key: string]: string });
+    actions.setAuthData(userObject as AuthPayload);
+    navigate('/');
   };
 
   useEffect(() => {

@@ -9,9 +9,12 @@ import {
 } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import { useNavigate } from 'react-router-dom';
+import { useTypedSelector } from '../../hooks';
 
 export const Header: React.FC = () => {
   const navigate = useNavigate();
+  const state = useTypedSelector((state) => state);
+  const { given_name } = state.authData;
   return (
     <Box>
       <AppBar position="fixed">
@@ -33,11 +36,13 @@ export const Header: React.FC = () => {
             onClick={() => navigate('/login')}
             variant="h6"
           >
-            Welcome Stephen!
+            {given_name && `Welcome ${given_name}`}
           </Typography>
-          <Button onClick={() => navigate('/login')} variant="contained">
-            Login
-          </Button>
+          {!given_name && (
+            <Button onClick={() => navigate('/login')} variant="contained">
+              Login
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </Box>
