@@ -6,6 +6,8 @@ import {
   getAlbumsApi,
   getUserApi,
   getUserAlbumsApi,
+  getAlbumApi,
+  getAlbumPhotosApi,
 } from '../state';
 import {
   setAuthData,
@@ -13,6 +15,8 @@ import {
   setAlbums,
   setUser,
   setUserAlbums,
+  setAlbum,
+  setPhotos,
 } from '../state/slices';
 
 export const useActions = () => {
@@ -29,6 +33,10 @@ export const useActions = () => {
       setUser,
       getUserAlbumsApi,
       setUserAlbums,
+      getAlbumApi,
+      setAlbum,
+      getAlbumPhotosApi,
+      setPhotos,
     },
     dispatch
   );

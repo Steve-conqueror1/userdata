@@ -1,7 +1,7 @@
 import { combineReducers, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { clearStore } from './actions';
-import { Album, AuthPayload, User } from '../types';
+import { Album, AuthPayload, Photo, User } from '../types';
 
 const authData = createSlice({
   name: 'authData',
@@ -87,11 +87,49 @@ const userAlbums = createSlice({
   },
 });
 
+const album = createSlice({
+  name: 'album',
+  initialState: {
+    id: 0,
+    userId: 0,
+    title: '',
+  },
+  reducers: {
+    setAlbum: (initialState, { payload }: PayloadAction<Album>) => ({
+      ...initialState,
+      ...payload,
+    }),
+  },
+  extraReducers: {
+    [clearStore.type]: () => ({
+      id: 0,
+      userId: 0,
+      title: '',
+    }),
+  },
+});
+
+const albumPhotos = createSlice({
+  name: 'albumPhotos',
+  initialState: [] as Photo[],
+  reducers: {
+    setPhotos: (initialState, { payload }: PayloadAction<Photo[]>) => [
+      ...initialState,
+      ...payload,
+    ],
+  },
+  extraReducers: {
+    [clearStore.type]: () => [],
+  },
+});
+
 export const { setAuthData } = authData.actions;
 export const { setUsers } = users.actions;
 export const { setAlbums } = albums.actions;
 export const { setUserAlbums } = userAlbums.actions;
 export const { setUser } = user.actions;
+export const { setAlbum } = album.actions;
+export const { setPhotos } = albumPhotos.actions;
 
 export default combineReducers({
   authData: authData.reducer,
@@ -99,4 +137,6 @@ export default combineReducers({
   albums: albums.reducer,
   userAlbums: userAlbums.reducer,
   user: user.reducer,
+  album: album.reducer,
+  albumPhotos: albumPhotos.reducer,
 });

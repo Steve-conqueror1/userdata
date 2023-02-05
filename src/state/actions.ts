@@ -8,5 +8,9 @@ export const getUserAlbumsApi = createAction<{ userId: number }>(
   'getUserAlbumsApi'
 );
 export const getAlbumsApi = createAction('getAlbumsApi');
+export const getAlbumApi = createAction<{ albumId: number }>('getAlbumApi');
+export const getAlbumPhotosApi = createAction<{ albumId: number }>(
+  'getAlbumPhotosApi'
+);
 export const getPhotoApi = createAction('getPhotoApi');
 export const clearStore = createAction('clearStore');
