@@ -1,7 +1,7 @@
 import { combineReducers, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { clearStore } from './actions';
-import { AuthPayload } from '../types';
+import { AuthPayload, User } from '../types';
 
 const authData = createSlice({
   name: 'authData',
@@ -31,8 +31,24 @@ const authData = createSlice({
   },
 });
 
+const users = createSlice({
+  name: 'users',
+  initialState: [] as User[],
+  reducers: {
+    setUsers: (initialState, { payload }: PayloadAction<User[]>) => [
+      ...initialState,
+      ...payload,
+    ],
+  },
+  extraReducers: {
+    [clearStore.type]: () => [],
+  },
+});
+
 export const { setAuthData } = authData.actions;
+export const { setUsers } = users.actions;
 
 export default combineReducers({
   authData: authData.reducer,
+  users: users.reducer,
 });
