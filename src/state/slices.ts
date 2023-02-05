@@ -59,12 +59,44 @@ const albums = createSlice({
   },
 });
 
+const user = createSlice({
+  name: 'user',
+  initialState: {} as User,
+  reducers: {
+    setUser: (initialState, { payload }: PayloadAction<User>) => ({
+      ...initialState,
+      ...payload,
+    }),
+  },
+  extraReducers: {
+    [clearStore.type]: () => ({} as User),
+  },
+});
+
+const userAlbums = createSlice({
+  name: 'userAlbums',
+  initialState: [] as Album[],
+  reducers: {
+    setUserAlbums: (initialState, { payload }: PayloadAction<Album[]>) => [
+      ...initialState,
+      ...payload,
+    ],
+  },
+  extraReducers: {
+    [clearStore.type]: () => [],
+  },
+});
+
 export const { setAuthData } = authData.actions;
 export const { setUsers } = users.actions;
 export const { setAlbums } = albums.actions;
+export const { setUserAlbums } = userAlbums.actions;
+export const { setUser } = user.actions;
 
 export default combineReducers({
   authData: authData.reducer,
   users: users.reducer,
   albums: albums.reducer,
+  userAlbums: userAlbums.reducer,
+  user: user.reducer,
 });

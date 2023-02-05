@@ -32,6 +32,7 @@ export type User = {
 };
 
 export type Album = {
+  id: number;
   userId: number;
   title: string;
 };

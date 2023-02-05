@@ -20,7 +20,7 @@ function* getUsers(action: ReturnType<typeof actions.getUsersApi>) {
   }
 }
 
-function* getAlbums(action: ReturnType<typeof actions.getUsersApi>) {
+function* getAlbums(action: ReturnType<typeof actions.getAlbumsApi>) {
   if (!process.env.REACT_APP_API_SERVER) {
     return;
   }
@@ -35,7 +35,42 @@ function* getAlbums(action: ReturnType<typeof actions.getUsersApi>) {
   }
 }
 
+function* getUserAlbums(action: ReturnType<typeof actions.getUserAlbumsApi>) {
+  if (!process.env.REACT_APP_API_SERVER) {
+    return;
+  }
+
+  const { userId } = action.payload;
+
+  try {
+    const { data }: AxiosResponse = yield api.get(
+      `${process.env.REACT_APP_API_SERVER}/users/${userId}/albums`
+    );
+    yield put(slicesActions.setUserAlbums(data));
+  } catch (err) {
+    console.log('something went wrong'); //Fixme: handle error
+  }
+}
+
+function* getUser(action: ReturnType<typeof actions.getUserApi>) {
+  if (!process.env.REACT_APP_API_SERVER) {
+    return;
+  }
+  const { userId } = action.payload;
+
+  try {
+    const { data }: AxiosResponse = yield api.get(
+      `${process.env.REACT_APP_API_SERVER}/users/${userId}`
+    );
+    yield put(slicesActions.setUser(data));
+  } catch (err) {
+    console.log('something went wrong'); //Fixme: handle error
+  }
+}
+
 export function* watchCommonSaga() {
   yield takeLatest(actions.getUsersApi.type, getUsers);
   yield takeLatest(actions.getAlbumsApi.type, getAlbums);
+  yield takeLatest(actions.getUserApi.type, getUser);
+  yield takeLatest(actions.getUserAlbumsApi.type, getUserAlbums);
 }
