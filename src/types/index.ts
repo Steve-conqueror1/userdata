@@ -21,7 +21,7 @@ type Company = {
 };
 
 export type User = {
-  id: string;
+  id: number;
   name: string;
   email: string;
   username: string;
@@ -29,4 +29,9 @@ export type User = {
   phone: string;
   address: Address;
   company: Company;
+};
+
+export type Album = {
+  userId: number;
+  title: string;
 };

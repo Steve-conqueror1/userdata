@@ -1,4 +1,4 @@
-import { put, takeLatest, select } from 'redux-saga/effects';
+import { put, takeLatest } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 import { api } from '../api';
 import * as actions from './actions';
@@ -20,6 +20,22 @@ function* getUsers(action: ReturnType<typeof actions.getUsersApi>) {
   }
 }
 
+function* getAlbums(action: ReturnType<typeof actions.getUsersApi>) {
+  if (!process.env.REACT_APP_API_SERVER) {
+    return;
+  }
+
+  try {
+    const { data }: AxiosResponse = yield api.get(
+      `${process.env.REACT_APP_API_SERVER}/albums`
+    );
+    yield put(slicesActions.setAlbums(data));
+  } catch (err) {
+    console.log('something went wrong'); //Fixme: handle error
+  }
+}
+
 export function* watchCommonSaga() {
   yield takeLatest(actions.getUsersApi.type, getUsers);
+  yield takeLatest(actions.getAlbumsApi.type, getAlbums);
 }

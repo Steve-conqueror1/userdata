@@ -1,7 +1,7 @@
 import { combineReducers, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { clearStore } from './actions';
-import { AuthPayload, User } from '../types';
+import { Album, AuthPayload, User } from '../types';
 
 const authData = createSlice({
   name: 'authData',
@@ -45,10 +45,26 @@ const users = createSlice({
   },
 });
 
+const albums = createSlice({
+  name: 'albums',
+  initialState: [] as Album[],
+  reducers: {
+    setAlbums: (initialState, { payload }: PayloadAction<Album[]>) => [
+      ...initialState,
+      ...payload,
+    ],
+  },
+  extraReducers: {
+    [clearStore.type]: () => [],
+  },
+});
+
 export const { setAuthData } = authData.actions;
 export const { setUsers } = users.actions;
+export const { setAlbums } = albums.actions;
 
 export default combineReducers({
   authData: authData.reducer,
   users: users.reducer,
+  albums: albums.reducer,
 });

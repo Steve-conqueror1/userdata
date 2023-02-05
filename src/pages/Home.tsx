@@ -13,15 +13,21 @@ const headers = [
   'Phone',
   'Company',
   'Website',
+  '№ of Albums',
 ];
 
 export const Home: React.FC = () => {
-  const { users } = useTypedSelector((state) => state);
+  const { users, albums } = useTypedSelector((state) => state);
   const actions = useActions();
 
   useEffect(() => {
     actions.getUsersApi();
+    actions.getAlbumsApi();
   }, []);
+
+  const getUserAlbumsCount = (userId: number) => {
+    return albums.filter((album) => album.userId === userId).length;
+  };
 
   const StyledTableRow = styled(TableRow)(({ theme }) => ({
     '&:nth-of-type(odd)': {
@@ -76,6 +82,9 @@ export const Home: React.FC = () => {
                   <Link color="primary" href="#" underline="hover">
                     {user.website}
                   </Link>
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  {getUserAlbumsCount(user.id)}
                 </StyledTableCell>
               </StyledTableRow>
             ))}
