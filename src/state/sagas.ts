@@ -100,6 +100,22 @@ function* getAlbumPhotos(action: ReturnType<typeof actions.getAlbumPhotosApi>) {
   }
 }
 
+function* getPhoto(action: ReturnType<typeof actions.getPhotoApi>) {
+  if (!process.env.REACT_APP_API_SERVER) {
+    return;
+  }
+  const { id } = action.payload;
+
+  try {
+    const { data }: AxiosResponse = yield api.get(
+      `${process.env.REACT_APP_API_SERVER}/photos/${id}`
+    );
+    yield put(slicesActions.setPhoto(data));
+  } catch (err) {
+    console.log('something went wrong'); //Fixme: handle error
+  }
+}
+
 export function* watchCommonSaga() {
   yield takeLatest(actions.getUsersApi.type, getUsers);
   yield takeLatest(actions.getAlbumsApi.type, getAlbums);
@@ -107,4 +123,5 @@ export function* watchCommonSaga() {
   yield takeLatest(actions.getUserAlbumsApi.type, getUserAlbums);
   yield takeLatest(actions.getAlbumApi.type, getAlbum);
   yield takeLatest(actions.getAlbumPhotosApi.type, getAlbumPhotos);
+  yield takeLatest(actions.getPhotoApi.type, getPhoto);
 }

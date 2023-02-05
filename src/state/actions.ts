@@ -12,5 +12,6 @@ export const getAlbumApi = createAction<{ albumId: number }>('getAlbumApi');
 export const getAlbumPhotosApi = createAction<{ albumId: number }>(
   'getAlbumPhotosApi'
 );
-export const getPhotoApi = createAction('getPhotoApi');
+
+export const getPhotoApi = createAction<{ id: number }>('getPhotoApi');
 export const clearStore = createAction('clearStore');

@@ -123,6 +123,32 @@ const albumPhotos = createSlice({
   },
 });
 
+const photo = createSlice({
+  name: 'photo',
+  initialState: {
+    albumId: 0,
+    id: 0,
+    title: '',
+    url: '',
+    thumbnailUrl: '',
+  },
+  reducers: {
+    setPhoto: (initialState, { payload }: PayloadAction<Photo>) => ({
+      ...initialState,
+      ...payload,
+    }),
+  },
+  extraReducers: {
+    [clearStore.type]: () => ({
+      albumId: 0,
+      id: 0,
+      title: '',
+      url: '',
+      thumbnailUrl: '',
+    }),
+  },
+});
+
 export const { setAuthData } = authData.actions;
 export const { setUsers } = users.actions;
 export const { setAlbums } = albums.actions;
@@ -130,6 +156,7 @@ export const { setUserAlbums } = userAlbums.actions;
 export const { setUser } = user.actions;
 export const { setAlbum } = album.actions;
 export const { setPhotos } = albumPhotos.actions;
+export const { setPhoto } = photo.actions;
 
 export default combineReducers({
   authData: authData.reducer,
@@ -139,4 +166,5 @@ export default combineReducers({
   user: user.reducer,
   album: album.reducer,
   albumPhotos: albumPhotos.reducer,
+  photo: photo.reducer,
 });
