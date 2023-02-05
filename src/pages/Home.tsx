@@ -72,7 +72,11 @@ export const Home: React.FC = () => {
                 <StyledTableCell align="right">
                   {user.company.name}
                 </StyledTableCell>
-                <StyledTableCell align="right">{user.website}</StyledTableCell>
+                <StyledTableCell align="right">
+                  <Link color="primary" href="#" underline="hover">
+                    {user.website}
+                  </Link>
+                </StyledTableCell>
               </StyledTableRow>
             ))}
           </AppTable>
