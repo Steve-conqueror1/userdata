@@ -26,10 +26,6 @@ export const LoginPage: React.FC = () => {
   };
 
   useEffect(() => {
-    // if (token) {
-    //   navigate('/');
-    // }
-
     /* global google */
     // @ts-ignore
     google.accounts.id.initialize({
