@@ -9,6 +9,7 @@ import {
   getAlbumApi,
   getAlbumPhotosApi,
   getPhotoApi,
+  updatePhotosApi,
 } from '../state';
 import {
   setAuthData,
@@ -41,6 +42,7 @@ export const useActions = () => {
       setPhotos,
       getPhotoApi,
       setPhoto,
+      updatePhotosApi,
     },
     dispatch
   );
