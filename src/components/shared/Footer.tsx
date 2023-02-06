@@ -7,11 +7,15 @@ import TelegramIcon from '@mui/icons-material/Telegram';
 import GoogleIcon from '@mui/icons-material/Google';
 import { FooterListItem } from '../FooterListItem';
 import { EMAIL, GITHUB, LINKEDIN, TELEGRAM } from '../../helpers';
+import { useMediaQuery } from '@mui/material';
 
 export const Footer: React.FC = () => {
+  const matches = useMediaQuery('(max-width: 600px)');
+
   return (
     <Box
       sx={{
+        marginTop: '64px',
         margin: 'auto 0',
         background: '#000',
         padding: '16px',
@@ -22,7 +26,14 @@ export const Footer: React.FC = () => {
       }}
     >
       <Container sx={{ color: '#fff' }}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Box
+          className="footer"
+          sx={{
+            display: 'flex',
+            flexDirection: matches ? 'column' : 'row',
+            justifyContent: 'space-between',
+          }}
+        >
           <Box>
             <Typography variant="h6">Contact Info</Typography>
             <List>
@@ -40,7 +51,7 @@ export const Footer: React.FC = () => {
               </FooterListItem>
             </List>
           </Box>
-          <Box>
+          <Box sx={{ marginTop: '26px' }}>
             <Typography variant="h6">Copyright</Typography>
             <Typography
               variant="body2"
