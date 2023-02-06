@@ -9,20 +9,19 @@ import {
 } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import { useNavigate } from 'react-router-dom';
-import { useTypedSelector, useActions } from '../../hooks';
+import { useAuth } from '../../hooks';
 
 export const Header: React.FC = () => {
   const navigate = useNavigate();
-  const state = useTypedSelector((state) => state);
-  const actions = useActions();
-  const { given_name } = state.authData;
+
+  const { logout, token } = useAuth();
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
-    if (!given_name) {
+    if (!token) {
       navigate('/login');
     } else {
-      actions.clearStore();
+      logout();
     }
   };
 
@@ -42,16 +41,9 @@ export const Header: React.FC = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             User Data
           </Typography>
-          <Typography
-            sx={{ marginRight: '8px' }}
-            onClick={() => navigate('/login')}
-            variant="h6"
-          >
-            {given_name && `Welcome ${given_name}`}
-          </Typography>
 
           <Button onClick={handleClick} variant="contained">
-            {!given_name ? 'Login' : 'Logout'}
+            {!token ? 'Login' : 'Logout'}
           </Button>
         </Toolbar>
       </AppBar>

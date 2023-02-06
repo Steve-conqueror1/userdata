@@ -3,3 +3,4 @@ export * from './shared/Footer';
 
 export * from './FooterListItem';
 export * from './AppTable';
+export * from './PrivateRoute';

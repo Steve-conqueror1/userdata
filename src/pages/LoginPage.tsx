@@ -16,9 +16,8 @@ export const LoginPage: React.FC = () => {
   const actions = useActions();
 
   const handleCallbackResponse = (response: GoogleResponse) => {
-    console.log('response', response);
-
     const { credential } = response;
+    localStorage.setItem('token', credential);
 
     const userObject = jwtDecode(credential);
 
@@ -27,6 +26,10 @@ export const LoginPage: React.FC = () => {
   };
 
   useEffect(() => {
+    // if (token) {
+    //   navigate('/');
+    // }
+
     /* global google */
     // @ts-ignore
     google.accounts.id.initialize({
@@ -40,6 +43,7 @@ export const LoginPage: React.FC = () => {
       size: 'large',
     });
   }, []);
+
   return (
     <Container sx={{ minHeight: 'auto' }}>
       <Box sx={{ minHeight: 'auto', margin: '180px 0 360px 0' }}>

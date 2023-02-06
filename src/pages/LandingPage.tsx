@@ -41,20 +41,6 @@ export const LandingPage: React.FC = () => {
             </MuiLink>
           </Typography>
         </Box>
-
-        <Box sx={{ marginTop: '16px' }}>
-          <Typography>
-            View albums{' '}
-            <MuiLink
-              variant="h6"
-              color="primary"
-              href="/albums"
-              underline="hover"
-            >
-              here &rarr;
-            </MuiLink>
-          </Typography>
-        </Box>
       </Box>
     </Container>
   );
